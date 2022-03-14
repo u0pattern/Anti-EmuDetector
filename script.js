@@ -24,7 +24,7 @@ Java.perform(function() {
 			}
 		}
 	} catch (err) {
-		console.log('[-] java.io.File never called [-]');
+		console.log('[-] java.io.File.exists never called [-]');
 	}
 	
 	// rename the package names
@@ -38,7 +38,7 @@ Java.perform(function() {
 			return this.getPackageInfo.call(this, name, flag);
 		}
 	} catch (err) {
-		console.log('[-] ApplicationPackageManager never called [-]');
+		console.log('[-] ApplicationPackageManager.getPackageInfo never called [-]');
 	}
 	
 });
