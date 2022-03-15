@@ -49,7 +49,7 @@ Java.perform(function() {
 			onLeave: function(retval) {
 				// const int ANDROID_CPU_FAMILY_X86 = 2;
 				// const int ANDROID_CPU_FAMILY_X86_64 = 5;
-				if([2,5].indexOf(retval)){
+				if([2,5].indexOf(retval) > -1){
 					// const int ANDROID_CPU_FAMILY_ARM64 = 4;
 					retval.replace(4);
 				}
