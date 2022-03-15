@@ -41,4 +41,22 @@ Java.perform(function() {
 		console.log('[-] ApplicationPackageManager.getPackageInfo never called [-]');
 	}
 	
+	// hook the `android_getCpuFamily` method
+	// https://android.googlesource.com/platform/ndk/+/master/sources/android/cpufeatures/cpu-features.c#1067
+	// Note: If you pass "null" as the first parameter for "Module.findExportByName" it will search in all modules
+	try {
+		Interceptor.attach(Module.findExportByName(null, 'android_getCpuFamily'), {
+			onLeave: function(retval) {
+				// const int ANDROID_CPU_FAMILY_X86 = 2;
+				// const int ANDROID_CPU_FAMILY_X86_64 = 5;
+				if([2,5].indexOf(retval)){
+					// const int ANDROID_CPU_FAMILY_ARM64 = 4;
+					retval.replace(4);
+				}
+			}
+		});
+	} catch (err) {
+		console.log('[-] android_getCpuFamily never called [-]');
+		// TODO: trace RegisterNatives in case the libraries are stripped.
+	}
 });
